@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tehran House Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Tehran House Price Prediction</h1>
+        <form action="/predict" method="post">
+            <label>Area (m²):</label>
+            <input type="number" name="area" step="0.1" required>
+
+            <label>Number of rooms:</label>
+            <input type="number" name="room" step="1" required>
+
+            <label>Parking</label>
+        <select name="parking" required>
+            <option value="" disabled selected hidden>Please choose an option</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label>Warehouse</label>
+        <select name="warehouse" required>
+            <option value="" disabled selected hidden>Please choose an option</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label>Elevator</label>
+        <select name="elevator" required>
+            <option value="" disabled selected hidden>Please choose an option</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+
+            <label>Address</label>
+            <select name="address">
+                <option value="Address_Andisheh">Andisheh</option>
+                <option value="Address_Central Janatabad">Central Janatabad</option>
+                <option value="Address_East Ferdows Boulevard">East Ferdows Boulevard</option>
+                <option value="Address_Farmanieh">Farmanieh</option>
+                <option value="Address_Gheitarieh">Gheitarieh</option>
+                <option value="Address_Jeyhoon">Jeyhoon</option>
+                <option value="Address_Niavaran">Niavaran</option>
+                <option value="Address_Ostad Moein">Ostad Moein</option>
+                <option value="Address_Pardis">Pardis</option>
+                <option value="Address_Pasdaran">Pasdaran</option>
+                <option value="Address_Persian Gulf Martyrs Lake">Persian Gulf Martyrs Lake</option>
+                <option value="Address_Pirouzi">Pirouzi</option>
+                <option value="Address_Punak">Punak</option>
+                <option value="Address_Saadat Abad">Saadat Abad</option>
+                <option value="Address_Salsabil">Salsabil</option>
+                <option value="Address_Shahr-e-Ziba">Shahr-e-Ziba</option>
+                <option value="Address_Shahrake Gharb">Shahrake Gharb</option>
+                <option value="Address_Shahrake Qods">Shahrake Qods</option>
+                <option value="Address_Shahran">Shahran</option>
+                <option value="Address_Southern Janatabad">Southern Janatabad</option>
+                <option value="Address_West Ferdows Boulevard">West Ferdows Boulevard</option>
+                <option value="Address_other">Other</option>
+            </select>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result-box">
+            <h3>{{ prediction_text }}</h3>
+            <hr>
+            <div class="input-details">
+                <h4>Inputs used:</h4>
+                <p>Area: {{ area }} m²</p>
+                <p>Number of rooms: {{ room }}</p>
+                <p>Parking: {{ 'Yes' if parking == '1' else 'No' }}</p>
+                <p>Warehouse: {{ 'Yes' if warehouse == '1' else 'No' }}</p>
+                <p>Elevator: {{ 'Yes' if elevator == '1' else 'No' }}</p>
+                <p>Address: {{ address.replace('Address_', '') }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>
